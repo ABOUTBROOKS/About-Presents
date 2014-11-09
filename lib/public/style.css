@@ -169,3 +169,17 @@ and open the template in the editor.
   width: 259px;
   white-space: nowrap;
 }
+
+.landing-page--button {
+  background: linear-gradient(to bottom, #959594, #000);
+  color: white;
+  display: block;
+  font-family: HelveticaNeue-CondensedBold;
+  line-height: 20px;
+  margin: 0.5em 0;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 175px;
+  white-space: nowrap;
+}
