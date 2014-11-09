@@ -9,6 +9,7 @@ if(params[:searchWord])
   searchResult = shop.fetchProductSearch(criteria)
 end%>
 <%= erb :header, :locals => {:shop => shop}%>
+<%= erb :navigation %>
 
 <div class="searchBar">
     <form action="productsResult" method="post">

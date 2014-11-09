@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : hamidmossaieb
 */
 
+body {
+  margin: 0;
+}
+
 .center {
     text-align: center;
 }
@@ -197,4 +201,31 @@ and open the template in the editor.
   height: 0;
   margin: 0 -6px 0 6px;
   width: 0;
+}
+
+
+/***********/
+
+
+.navigation {
+  background: linear-gradient(to bottom, #eee, #959594);
+  text-align: center;
+}
+
+.navigation--item {
+  background: linear-gradient(to bottom, #959594, #000);
+  color: white;
+  display: inline-block;
+  font-family: HelveticaNeue-CondensedBold;
+  line-height: 20px;
+  margin: 0 0.5em;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.navigation--item:hover {
+  background: linear-gradient(to bottom, #5b5b5b, #000);
+  color: #acaeb1;
 }
