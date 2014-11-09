@@ -1,0 +1,8 @@
+<%shop.categoryManager.subcategories(clickedId).each do |key, cat|%>
+      <li class="category" data-id="<%=cat.id%>">
+        <%=cat.name%>
+              <ul class="subcategories">
+            
+          </ul>
+      </li>
+    <%end%>

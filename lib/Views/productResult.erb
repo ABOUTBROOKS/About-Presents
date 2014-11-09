@@ -1,0 +1,113 @@
+<%
+require "pry_debug"
+if(params[:searchWord])
+  criteria = shop.productSearchCriteria
+  criteria.selectProductFields(["default_image"])
+  criteria.result["limit"]=25
+  criteria.result["offset"]=(Integer(params[:page])*25)
+  criteria.filterBySearchword(params[:searchWord])
+  searchResult = shop.fetchProductSearch(criteria)
+end%>
+<%= erb :header, :locals => {:shop => shop}%>
+
+<div class="searchBar">
+    <form action="productsResult" method="post">
+        <input type="hidden" name="page" value="0">
+        <input type="text" name="searchWord">
+        <button type="submit">Artikel suchen</button>
+    </form>
+</div>
+<%if (params[:searchWord])%>
+  <div id="categoryTreeWrapper">
+    <%= erb :categories, :locals => {:shop => shop, :searchResult=>searchResult}%>
+  </div>
+    <div class="productsResultWrapper">
+        <ul class=" productsResultList">
+            <% searchResult.products.each do |key, product|
+              if product.isActive%>
+                <li class="productsResultListElement" data-id="<%=product.id%>">
+                  <div class="productsResultImage">
+                    <img src="<%=product.defaultImage.url(200, 200)%>"></img>
+                  </div>
+                  <div class="productsResultText">
+                      <p><%=product.name %></p>
+                  </div>
+                </li>
+            <%end
+            end%>
+        </ul>
+    </div>
+    <div class="pageControl">
+        <ul class="pageControlList">
+            <%if(Integer(params[:page])!=0)%>
+              <li class="pageControlListElement">
+                  <form action="productsResult" method="post">
+                      <input type="hidden" name="page" value="<%=String(Integer(params[:page])-1)%>">
+                      <input type="hidden" name="searchWord" value="<%=params[:searchWord]%>">
+                      <button type="submit"><%=String(Integer(params[:page])-1)%></button>
+                  </form>
+              </li>
+            <%end%>
+              <li class="pageControlListElement">
+                  <form action="productsResult" method="post">
+                      <input type="hidden" name="page" value="<%=String(Integer(params[:page]))%>">
+                      <input type="hidden" name="searchWord" value="<%=params[:searchWord]%>">
+                      <button type="submit"><%=String(Integer(params[:page]))%></button>
+                  </form>
+              </li>
+              <li class="pageControlListElement">
+                  <form action="productsResult" method="post">
+                      <input type="hidden" name="page" value="<%=String(Integer(params[:page])+1)%>">
+                      <input type="hidden" name="searchWord" value="<%=params[:searchWord]%>">
+                      <button type="submit"><%=String(Integer(params[:page])+1)%></button>
+                  </form>
+              </li>
+        </ul>
+    </div>
+<%end%>
+    <script type="text/javascript">
+    $('.productsResultListElement').click(function() {
+    id = $(this).data("id")
+    AY.openProductLayer('<%=shop.sessionId %>', id, <%=shop.appId%>);
+    });
+    
+    window.ayAsyncInit = function() {
+    $('.productsResultListElement').click(function() {
+    var id = $(this).data('id');
+    });
+    }
+    
+    $(function() {
+      $(document).on('click', '.category', function() {
+        var subcategories = $(this).find('.subcategories')
+        
+        $('.subcategories').attr('data-hide', 1);
+        if (subcategories.html().trim().length < 1) {
+            var id = $(this).data("id");
+          $.get("/subCategories/"+id, function(result){
+            var subcategories = $('li[data-id='+id+']').find('.subcategories');
+            subcategories.html(result)
+            subcategories.show();
+            subcategories.attr('data-hide', 0);
+            subcategories.parents('.subcategories').show();
+            subcategories.parents('.subcategories').attr('data-hide', 0);
+            
+            $('.subcategories[data-hide=1]').hide();
+          });
+          
+          
+        }else{
+          subcategories.show()
+        }
+        
+      });
+    });
+      
+    
+    </script>
+  </body>
+</html>
+
+<%
+
+%>

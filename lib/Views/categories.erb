@@ -1,0 +1,15 @@
+<% categoryTree = shop.fetchCategoryTree%>
+
+
+<div class="categoryFilter">
+    <ul class="categoryList">
+        <% categoryTree.categories.each do |key, category| %>
+        <li data-id="<%=String(category.id)%>" class="category">
+            <p><%=category.name%></p>
+            <ul class="subcategories">
+              
+            </ul>
+        </li>
+        <%end%>
+    </ul>
+</div>

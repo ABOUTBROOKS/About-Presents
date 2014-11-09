@@ -1,0 +1,23 @@
+<%= erb :header, :locals => {:shop => shop}%>
+<div class="generator" ng-app>
+  <input class="input" type="text" ng-model="grußText" placeholder="Grußtext hier eingeben">
+  <canvas style="clear:both" id="c"></canvas>
+</div>
+
+
+<script type=text/javascript>
+  var canvas = new fabric.Canvas('c');
+  $rootScope.scope.$watch('grußText', function() {
+    var grußText = $(".input").val();
+    alert(grußtext);
+  }
+  canvas.setHeight(1000);
+  canvas.setWidth(1000);
+  canvas.setBackgroundImage("/test.jpg");
+  var text = new fabric.Text(grußText, { left: 100, top: 100 });
+  canvas.add(text);
+  $(".12").click(function(){
+    canvas.isDrawingMode = false;
+    window.open(canvas.toDataURL('png'));
+  });
+</script>
