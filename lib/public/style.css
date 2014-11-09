@@ -188,3 +188,13 @@ and open the template in the editor.
   background: linear-gradient(to bottom, #5b5b5b, #000);
   color: #acaeb1;
 }
+
+.landing-page--button:after {
+  border: 6px solid;
+  border-color: transparent transparent transparent white;
+  content: "";
+  display: inline-block;
+  height: 0;
+  margin: 0 -6px 0 6px;
+  width: 0;
+}
