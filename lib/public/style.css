@@ -183,3 +183,8 @@ and open the template in the editor.
   width: 175px;
   white-space: nowrap;
 }
+
+.landing-page--button:hover {
+  background: linear-gradient(to bottom, #5b5b5b, #000);
+  color: #acaeb1;
+}
