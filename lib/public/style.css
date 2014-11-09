@@ -140,3 +140,32 @@ and open the template in the editor.
 .generator {
     clear: both;
 }
+
+
+/***********/
+
+
+.landing-page {
+  background: url("betonbaum.jpg") no-repeat 50% 50%/cover;
+  height: calc(100vh - 52px - 52px);
+  margin: 26px auto;
+  width: 984px;
+}
+
+.landing-page--content {
+  padding: 36px;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.landing-page--logo {
+  background: url("about-presents.svg") no-repeat;
+  display: block;
+  height: 132px;
+  overflow: hidden;
+  text-indent: 1000px;
+  width: 259px;
+  white-space: nowrap;
+}
