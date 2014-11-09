@@ -1,23 +1,24 @@
 <%= erb :header, :locals => {:shop => shop}%>
-<div class="generator" ng-app>
-  <input class="input" type="text" ng-model="grußText" placeholder="Grußtext hier eingeben">
-  <canvas style="clear:both" id="c"></canvas>
+<div class="generator">   
+      <textarea placeholder="Grußtext hier eingeben" class="input" name="textarea" style="width:250px;height:150px;"></textarea>
+      <button class="button">Text generieren</button>
+      <canvas style="clear:both; display: none" id="c"></canvas>
 </div>
 
 
 <script type=text/javascript>
+$(".button").click(function(){
+  $("#c").show()
   var canvas = new fabric.Canvas('c');
-  $rootScope.scope.$watch('grußText', function() {
-    var grußText = $(".input").val();
-    alert(grußtext);
-  }
-  canvas.setHeight(1000);
-  canvas.setWidth(1000);
-  canvas.setBackgroundImage("/test.jpg");
-  var text = new fabric.Text(grußText, { left: 100, top: 100 });
+  canvas.setHeight(601);
+  canvas.setWidth(800);
+  canvas.setBackgroundImage("weihnachten-karte.jpg");
+  var text = new fabric.Text($(".input").val(), { left: 100, top: 100 });
   canvas.add(text);
   $(".12").click(function(){
     canvas.isDrawingMode = false;
     window.open(canvas.toDataURL('png'));
   });
+});
+ 
 </script>
